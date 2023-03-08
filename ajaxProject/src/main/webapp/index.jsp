@@ -30,7 +30,15 @@
 				},
 				success : function(result){
 					console.log(result);
-					$('#result1').text(result);
+					//$('#result1').text(result);
+					
+					// JSONArray 방법 : 응답데이터가 배열 형태면 => 인덱스에 접근 가능 [인덱스]
+					//let value = '이름 : ' + result[0] + '<br>나이 : ' + result[1];
+					//$('#result1').html(value);
+					
+					// JSONObject 방법 : 응답데이터가 객체 형태면 => 속성에 접근가능 .속성명
+					let value = '이름 : ' + result.name + '<br>나이 : ' + result.age;
+					$('#result1').html(value);
 				}, 
 				error :  function(){
 					console.log('ajax통신 실패');
