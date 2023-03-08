@@ -48,5 +48,52 @@
 	</script>
 	
 	
+	
+	
+	
+	
+	
+	<h3>2. 조회요청 후 조회된 한 회원 "객체"를 응답받아서 출력</h3>
+	
+	조회할 회원번호 : <input type="number" id="userNo">
+	<button id="btn2">조회</button>
+	<div id="result2"></div>
+	
+	
+	<script>
+		$(function(){
+		
+			$('#btn2').click(function(){
+				
+				$.ajax({
+					url : 'ajax2.do',
+					data : {
+						num : $('#userNo').val()
+					},
+					success : function(obj){
+						console.log(obj);
+						
+						let value = '<ul>'
+						          + '<li>이름 : ' + obj.name + '</li>'
+						          + '<li>아이디 : ' + obj.userId + '</li>'
+						          + '<li>전화번호 : ' + obj.phone + '</li>'
+						          + '</li>';
+						          
+						$('#result2').html(value);
+					},
+					error : function(){
+						console.log('ajax통신 실패');
+					}
+				});
+			});	
+		})
+	</script>
+	
+	
+	
+	
+	
+	
+	
 </body>
 </html>

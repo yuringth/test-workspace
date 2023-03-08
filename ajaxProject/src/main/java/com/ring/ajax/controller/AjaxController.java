@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ring.ajax.model.vo.Member;
+
 @Controller
 public class AjaxController {
 
@@ -87,6 +89,34 @@ public class AjaxController {
 		
 		return jObj.toJSONString(); // 해결1) toJSONString() : 메소드를 호출하면 JSONObject를 문자열로 반환 / JSONArray에서도 똑같이 적용 가능
 	}
+	
+	
+	
+	// ================
+	
+	@ResponseBody
+	@RequestMapping(value="ajax2.do", produces="application/json; charset=UTF-8")
+	public String ajaxMethod2(int num) {
+		
+		// Member m = mService.selectMember(num); => 잘되었다고 가상
+		
+		Member m = new Member("user01", "pass01", "홍길동", 15, "010-1234-5678");
+		
+		// JSON형태로 만들어서 응답하기(자바객체를 자바스크립트에서 사용못하니 자바스크립트에서 사용가능한 형태로 만들기)
+		JSONObject jObj = new JSONObject();
+		jObj.put("userId", m.getUserId());
+		jObj.put("userPwd", m.getUserPwd());
+		jObj.put("name", m.getName());
+		jObj.put("age", m.getAge());
+		jObj.put("phone", m.getPhone());
+		
+		return jObj.toJSONString();
+		
+	}
+	
+	
+	
+	
 	
 	
 	
