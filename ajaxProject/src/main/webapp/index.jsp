@@ -91,8 +91,71 @@
 	
 	
 	
+	<h3>3. 조회처리 후 조회된 회원 리스트를 응답받아서 출력</h3>
+	<button onclick="test3();">전체조회</button>
+	<br><br>
 	
+	<table border="1" id="result3">
+		<thead>
+			<th>아이디</th>
+			<th>이름</th>
+			<th>전화번호</th>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
 	
+		<script>
+		function test3(){
+			
+			$.ajax({
+				url:'ajax3.do',
+				success:function(list){
+					console.log(list); // [{..},{..},{..}]
+					
+					let value="";
+					for(let i in list){
+						value += '<tr>'
+						       + '<td>' + list[i].userId + '</td>'
+						       + '<td>' + list[i].name + '</td>'
+						       + '<td>' + list[i].phone + '</td>'
+						       + '</tr>'
+					}	
+					$('#result3 tbody').html(value);
+					
+				},
+				error:function(request, error) { //에러 확인하는 방법 => 매개변수로 request, error잦
+					console.log('ajax통신실패');
+					console.log(error);
+				}
+			});
+		}
+	</script>
+	
+	<script>
+		function test3(){
+			$.ajax({
+				url:'ajax3.do',
+				success:function(list){
+					console.log(list);
+					
+					let value="";
+					for(let i in list){
+						value += '<tr>'
+						       + '<td>' + list[i].userId + '</td>'
+						       + '<td>' + list[i].name + '</td>'
+						       + '<td>' + list[i].phone + '</td>'
+						       + '</tr>'
+					}	
+					$('#result3 tbody').html(value);
+					
+				},
+				error:function(){
+					console.log('ajax통신 실패');
+				}
+			});
+		}
+	</script>
 	
 	
 </body>

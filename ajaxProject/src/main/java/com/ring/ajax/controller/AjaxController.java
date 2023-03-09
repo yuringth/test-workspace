@@ -1,10 +1,13 @@
 package com.ring.ajax.controller;
 
+import java.util.ArrayList;
+
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.ring.ajax.model.vo.Member;
 
 @Controller
@@ -94,6 +97,8 @@ public class AjaxController {
 	
 	// ================
 	
+	/*
+	// JSON 방식
 	@ResponseBody
 	@RequestMapping(value="ajax2.do", produces="application/json; charset=UTF-8")
 	public String ajaxMethod2(int num) {
@@ -113,10 +118,45 @@ public class AjaxController {
 		return jObj.toJSONString();
 		
 	}
+	*/
+	
+	
+	// GSON 방식 => JSON과 같이 속성명, 속성값을 작성하지 않아도 알아서 그 작업을 해줌
+	@ResponseBody
+	@RequestMapping(value="ajax2.do", produces="application/json; charset=UTF-8")
+	public String ajaxMethod2(int num) {
+		
+		// DB가서 조회해온 가상의 데이터
+		Member m = new Member("user01", "pass01", "홍길동", 20, "010-1234-5678");
+		
+		return new Gson().toJson(m);
+		
+	}
 	
 	
 	
 	
+	//======================================
+	
+	@ResponseBody
+	@RequestMapping(value="ajax3.do", produces="application/json; charset=UTF-8") // 한글이 있으니 인코딩 필수
+	public String ajaxMethod3() {
+		
+		//ArrayList<Member> list = mService.selectList(); // DB에 잘 갔다왔다고 가정
+		
+		ArrayList<Member> list = new ArrayList();
+		list.add(new Member("user01", "pass01", "홍길동", 20, "010-1234-5678"));
+		list.add(new Member("user02", "pass02", "김길동", 21, "010-2222-5678"));
+		list.add(new Member("user03", "pass03", "박길동", 23, "010-3333-5678"));
+		
+		System.out.println(list);
+		// JSONArray에 담아서 응답할 것 (객체배열안에 객체를 추가하기)
+		// 하지만 GSON을 사용하면 위의 작업을 할 수 있게 코드가 짜여있음
+		
+		return new Gson().toJson(list);
+		
+		
+	}
 	
 	
 	
