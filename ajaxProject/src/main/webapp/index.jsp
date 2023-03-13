@@ -104,33 +104,7 @@
 		<tbody>
 		</tbody>
 	</table>
-	
-		<script>
-		function test3(){
-			
-			$.ajax({
-				url:'ajax3.do',
-				success:function(list){
-					console.log(list); // [{..},{..},{..}]
-					
-					let value="";
-					for(let i in list){
-						value += '<tr>'
-						       + '<td>' + list[i].userId + '</td>'
-						       + '<td>' + list[i].name + '</td>'
-						       + '<td>' + list[i].phone + '</td>'
-						       + '</tr>'
-					}	
-					$('#result3 tbody').html(value);
-					
-				},
-				error:function(request, error) { //에러 확인하는 방법 => 매개변수로 request, error잦
-					console.log('ajax통신실패');
-					console.log(error);
-				}
-			});
-		}
-	</script>
+
 	
 	<script>
 		function test3(){
