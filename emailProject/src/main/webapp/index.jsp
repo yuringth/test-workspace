@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-잘뜨나요?아이우에오 
+잘뜨나요?
 </body>
 </html>
